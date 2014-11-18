@@ -40,19 +40,52 @@ grunt.initConfig({
 ### Usage Examples
 
 #### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+Project -
+ 
+In this example, the `html/sample.html` would be moved to `/sample.html` and the reference would be updated as well. 
 
 ```js
 grunt.initConfig({
   movehtml: {
     options: {},
     files: {
-      'dest/sample.html': 'src/sample.html',
+      'workspace/sample.html': 'workspace/html/sample.html',
     },
   },
 });
 ```
 
+**original workspace/html/sample.html**
+```html
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/sample.css"/>
+</head>
+<body>
+Sample HTML file.
+<script type="text/javascript" src="../js/sample.js"></script>
+</body>
+</html>
+```
+
+**after movehtml sample.html**
+```html
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/sample.css"/>
+</head>
+<body>
+Sample HTML file.
+<script type="text/javascript" src="js/sample.js"></script>
+</body>
+</html>
+```
 #### Custom Options
 
 ## Contributing

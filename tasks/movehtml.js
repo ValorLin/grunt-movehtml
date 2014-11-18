@@ -9,6 +9,28 @@
 'use strict';
 var Path = require('path');
 
+function updateReference(destpath, srcpath, htmlContent) {
+    var relativePath = Path.relative(
+        Path.dirname(destpath),
+        Path.dirname(srcpath)
+    );
+
+    htmlContent = htmlContent.replace(/(url\(|['\"])([^'")]*?.\.(png|jpg|gif|css|js|ico|html|json))(['\")])/g, function () {
+        var prefix, url, postfix;
+
+        prefix = arguments[1];
+        url = arguments[2];
+        postfix = arguments[4];
+
+        return prefix + Path.join(
+                relativePath,
+                Path.dirname(url),
+                Path.basename(url)
+            ).replace(/\\/g, '/') + postfix;
+    });
+    return htmlContent;
+}
+
 module.exports = function (grunt) {
     grunt.registerMultiTask('movehtml', 'Move html file and update reference.', function () {
         // Merge task-specific and/or target-specific options with these defaults.
@@ -39,25 +61,3 @@ module.exports = function (grunt) {
         });
     });
 };
-
-function updateReference(destpath, srcpath, htmlContent) {
-    var relativePath = Path.relative(
-        Path.dirname(destpath),
-        Path.dirname(srcpath)
-    );
-
-    htmlContent = htmlContent.replace(/(url\(|['\"])([^'")]*?.\.(png|jpg|gif|css|js|ico|html|json))(['\")])/g, function () {
-        var prefix, url, postfix;
-
-        prefix = arguments[1];
-        url = arguments[2];
-        postfix = arguments[4];
-
-        return prefix + Path.join(
-                relativePath,
-                Path.dirname(url),
-                Path.basename(url)
-            ).replace(/\\/g, '/') + postfix;
-    });
-    return htmlContent;
-}

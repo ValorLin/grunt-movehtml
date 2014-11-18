@@ -1,6 +1,6 @@
 /*
  * grunt-movehtml
- * https://github.com/weilao/grunt-movehtml
+ * https://github.com/html-js/grunt-movehtml
  *
  * Copyright (c) 2014 Weilao
  * Licensed under the MIT license.
