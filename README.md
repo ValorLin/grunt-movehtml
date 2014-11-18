@@ -42,7 +42,7 @@ grunt.initConfig({
 #### Default Options
 Project -
  
-In this example, the `html/sample.html` would be moved to `/sample.html` and the reference would be updated as well. 
+In this example, the `workspace/html/sample.html` would be moved to `workspace/sample.html` and the reference would be updated as well. 
 
 ```js
 grunt.initConfig({
@@ -71,7 +71,7 @@ Sample HTML file.
 </html>
 ```
 
-**after movehtml sample.html**
+**after movehtml workspace/sample.html**
 ```html
 <!DOCTYPE html>
 <html>
