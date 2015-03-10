@@ -15,7 +15,7 @@ function updateReference(destpath, srcpath, htmlContent) {
         Path.dirname(srcpath)
     );
 
-    htmlContent = htmlContent.replace(/(url\(|['"])([^'")]*?.\.(png|jpg|gif|css|js|ico|html|json))(['")])/g, function () {
+    htmlContent = htmlContent.replace(/(url\(|['"])([^'")]*?.\.(png|jpg|webp|gif|css|js|ico|html|json))(['")])/g, function () {
         var prefix, url, postfix;
 
         prefix = arguments[1];
