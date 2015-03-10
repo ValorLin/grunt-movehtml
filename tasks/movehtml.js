@@ -9,10 +9,10 @@
 'use strict';
 var Path = require('path');
 
-function updateReference(destpath, srcpath, htmlContent) {
+function updateReference(destPath, srcPath, htmlContent) {
     var relativePath = Path.relative(
-        Path.dirname(destpath),
-        Path.dirname(srcpath)
+        Path.dirname(destPath),
+        Path.dirname(srcPath)
     );
 
     htmlContent = htmlContent.replace(/(url\(|['"])([^'")]*?.\.(png|jpg|webp|gif|ico|css|js|json|html))(['")])/g, function () {
