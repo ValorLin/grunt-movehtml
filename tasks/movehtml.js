@@ -23,10 +23,10 @@ function updateReference(destpath, srcpath, htmlContent) {
         postfix = arguments[4];
 
         return prefix + Path.join(
-            relativePath,
-            Path.dirname(url),
-            Path.basename(url)
-        ).replace(/\\/g, '/') + postfix;
+                relativePath,
+                Path.dirname(url),
+                Path.basename(url)
+            ).replace(/\\/g, '/') + postfix;
     });
     return htmlContent;
 }
@@ -35,28 +35,30 @@ module.exports = function (grunt) {
     grunt.registerMultiTask('movehtml', 'Move html file and update reference.', function () {
 
         this.files.forEach(function (f) {
-            // Concat specified files.
-        f.src.filter(function (filepath) {
-                // Warn on and remove invalid source files (if nonull was set).
-                if (!grunt.file.exists(filepath)) {
-                    grunt.log.warn('Source file "' + filepath + '" not found.');
-                    return false;
-                } else {
-                    return true;
-                }
-            }).forEach(function (srcpath) {
-                var destpath, content;
-                destpath = f.dest;
 
-                content = grunt.file.read(srcpath);
-                content = updateReference(destpath, srcpath, content);
+            f.src
+                .filter(function (filepath) {
+                    // Warn on and remove invalid source files (if nonull was set).
+                    if (!grunt.file.exists(filepath)) {
+                        grunt.log.warn('Source file "' + filepath + '" not found.');
+                        return false;
+                    } else {
+                        return true;
+                    }
+                })
+                .forEach(function (srcpath) {
+                    var destpath, content;
+                    destpath = f.dest;
 
-                grunt.file.write(destpath, content);
-                grunt.log.writeln('File "' + f.dest + '" created.');
+                    content = grunt.file.read(srcpath);
+                    content = updateReference(destpath, srcpath, content);
 
-                grunt.file.delete(srcpath);
-                grunt.log.writeln('File "' + srcpath + '" deleted.');
-            });
+                    grunt.file.write(destpath, content);
+                    grunt.log.writeln('File "' + f.dest + '" created.');
+
+                    grunt.file.delete(srcpath);
+                    grunt.log.writeln('File "' + srcpath + '" deleted.');
+                });
 
         });
     });
