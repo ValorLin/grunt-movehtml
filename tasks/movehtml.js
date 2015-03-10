@@ -50,10 +50,13 @@ module.exports = function (grunt) {
             }).forEach(function (srcpath) {
                 var destpath, content;
                 destpath = f.dest;
+
                 content = grunt.file.read(srcpath);
                 content = updateReference(destpath, srcpath, content);
+
                 grunt.file.write(destpath, content);
                 grunt.log.writeln('File "' + f.dest + '" created.');
+
                 grunt.file.delete(srcpath);
                 grunt.log.writeln('File "' + srcpath + '" deleted.');
             });
